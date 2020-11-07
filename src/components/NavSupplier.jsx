@@ -46,7 +46,7 @@ export default function NavSupplier() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link className='nav-link js-scroll-trigger' to={'login'}>
+              <Link className='nav-link js-scroll-trigger' to='login'>
                 App
               </Link>
             </li>

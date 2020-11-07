@@ -1,9 +1,13 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Router } from 'react-router-dom';
 import CustomerLandingPage from './components/LandingPages/CustomerLandingPage';
 import SupplierLandingPage from './components/LandingPages/SupplierLandingPage';
-import Signup from './components/Signup'
+
 import LoginPage from './components/LandingPages/LoginPage';
+import SignupPage from './components/LandingPages/SignupPage';
+import Home from './components/AppViews/Home';
+import Event from './components/AppViews/Event';
+import SearchResults from './components/AppViews/SearchResults';
 
 function App() {
   return (
@@ -18,8 +22,17 @@ function App() {
         <LoginPage />
       </Route>
       <Route exact path="/signup">
-        <Signup />
+        <SignupPage />
       </Route>
+      <Route exact path="/home">
+        <Home />
+      </Route>
+      <Route exact path="/event">
+        <Event />
+      </Route>
+      <Router exact path="/results">
+        <SearchResults />
+      </Router>
     </Switch>
   );
 }
