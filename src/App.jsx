@@ -1,12 +1,26 @@
-import React, { Component } from 'react'
-import User from './components/User'
+import React from 'react'
+import { Switch, Route } from 'react-router-dom';
+import CustomerLandingPage from './components/LandingPages/CustomerLandingPage';
+import SupplierLandingPage from './components/LandingPages/SupplierLandingPage';
+import Signup from './components/Signup'
+import LoginPage from './components/LandingPages/LoginPage';
 
 function App() {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <User />
-    </div>
+    <Switch>
+      <Route exact path="/supplier">
+        <SupplierLandingPage />
+      </Route>
+      <Route exact path="/">
+        <CustomerLandingPage />
+      </Route>
+      <Route exact path="/login">
+        <LoginPage />
+      </Route>
+      <Route exact path="/signup">
+        <Signup />
+      </Route>
+    </Switch>
   );
 }
 
