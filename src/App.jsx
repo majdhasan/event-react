@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import CustomerLandingPage from './components/LandingPages/CustomerLandingPage';
 import SupplierLandingPage from './components/LandingPages/SupplierLandingPage';
 
@@ -8,6 +8,7 @@ import SignupPage from './components/LandingPages/SignupPage';
 import Home from './components/AppViews/Home';
 import Event from './components/AppViews/Event';
 import SearchResults from './components/AppViews/SearchResults';
+import NewEvent from './components/AppViews/NewEvent';
 
 function App() {
   return (
@@ -27,12 +28,15 @@ function App() {
       <Route exact path="/home">
         <Home />
       </Route>
-      <Route exact path="/event">
+      <Route exact path="/event" >
         <Event />
       </Route>
-      <Router exact path="/results">
+      <Route exact path="/results">
         <SearchResults />
-      </Router>
+      </Route>
+      <Route exact path="/new-event/">
+        <NewEvent />
+      </Route>
     </Switch>
   );
 }

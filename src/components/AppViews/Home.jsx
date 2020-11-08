@@ -1,31 +1,51 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import EventCard from '../AppComponents/EventCard'
+import EventCardMaterial from '../AppComponents/EventCardMaterial'
+
+import Footer from '../LandingPageSections/Footer'
+import NavCustomer from '../NavCustomer'
 
 export default function Home() {
+
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+
+        axios.get(`http://localhost:3000/api/v1/loggedUser`)
+            .then(res => {
+                console.log(res);
+                res.status === 200 && setUser(res.data)
+            })
+            .catch(err => {
+                console.log("Failed sorry: try again" + err);
+            })
+    });
     return (
         <div>
-            <section class="content-section bg-light">
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col col-lg-2 col-md-12 col-sm-12 col-sx-12 col-sx-12">
+            <NavCustomer></NavCustomer>
+            <section className="content-section bg-light">
+                <div className="container text-center">
+                    <div className="row">
+                        <div className="col col-lg-2 col-md-12 col-sm-12 col-sx-12 col-sx-12">
                             <img
-                                class="event-avatar d-block mx-auto mx-md-0"
+                                className="event-avatar d-block mx-auto mx-md-0"
                                 src="https://media-exp1.licdn.com/dms/image/C5603AQHpBr_qJDHjpw/profile-displayphoto-shrink_400_400/0?e=1609372800&amp;v=beta&amp;t=SzHK75ycpvj542YP57KjMICFkWqXmMAwNmPR9d05uus"
                                 alt=""
                             />
                         </div>
-                        <div class="col col-lg-6 col-md-12 col-sm-12 col-sx-12">
-                            <div class="row">
-                                <h1>Hi Majd Hasan</h1>
+                        <div className="col col-lg-6 col-md-12 col-sm-12 col-sx-12">
+                            <div className="row">
+                                <h1>Hi {user && (user.firstname + " " + user.lastname)}</h1>
                             </div>
-                            <div class="row">
+                            <div className="row">
                                 <p>You have <b>0</b> pending invites</p>
                             </div>
                         </div>
-                        <div class="col col-lg-3 col-md-12 col-sm-12 col-sx-12 ml-auto">
-                            <a href="/event/new"
+                        <div className="col col-lg-3 col-md-12 col-sm-12 col-sx-12 ml-auto">
+                            <a href="/new-event"
                             ><button
-                                class="btn btn-primary btn-lg btn-dark btn-home"
+                                className="btn btn-primary btn-lg btn-dark btn-home"
                                 type="button"
                                 name="button"
                             >
@@ -34,7 +54,7 @@ export default function Home() {
 
                             <a href="/logout"
                             ><button
-                                class="btn btn-primary btn-lg btn-dark btn-home"
+                                className="btn btn-primary btn-lg btn-dark btn-home"
                                 type="button"
                                 name="button"
                             >
@@ -45,18 +65,25 @@ export default function Home() {
                     <hr />
 
                     <h4>Your upcoming Events</h4>
-                    <div class="row">
+                    <div className="row">
                         <EventCard></EventCard>
                         <EventCard></EventCard>
                         <EventCard></EventCard>
                         <EventCard></EventCard>
                         <EventCard></EventCard>
                         <EventCard></EventCard>
-                        <EventCard></EventCard>
+                        <EventCardMaterial></EventCardMaterial>
+                        <EventCardMaterial></EventCardMaterial>
+                        <EventCardMaterial></EventCardMaterial>
+                        <EventCardMaterial></EventCardMaterial>
+                        <EventCardMaterial></EventCardMaterial>
+
+                        <EventCardMaterial></EventCardMaterial>
+
                     </div>
                 </div>
             </section>
-            
+            <Footer></Footer>
         </div>
     )
 }

@@ -6,11 +6,14 @@ import NavCustomer from '../NavCustomer'
 export default function SearchResults() {
     return (
         <div>
-            <NavCustomer></NavCustomer>
-            <section class="content-section bg-light" id="about">
-                <div class="container text-center">
-                    <h2>Search results for <u>What!</u> in <u>Where</u> </h2>
-                    <div class="row">
+            <NavCustomer />
+            <section className="content-section bg-light">
+                <div className="container text-center">
+                    <h2>Search results for <u>what!</u> in <u>where</u> </h2>
+                    <div className="row">
+                        <EventCard />
+                        <EventCard />
+                        <EventCard />
                         <EventCard />
                     </div>
                 </div>

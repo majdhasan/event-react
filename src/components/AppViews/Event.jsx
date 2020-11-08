@@ -71,7 +71,7 @@ export default function Event() {
                                                     rows="4"
                                                 ></textarea>
                                             </div>
-                                            <button type="submit" className="btn btn-normal ml-auto">
+                                            <button type="submit" className="btn btn-primary">
                                                 Submit
                 </button>
                                         </div>
