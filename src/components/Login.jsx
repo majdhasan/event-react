@@ -1,34 +1,28 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import NavCustomer from './NavCustomer'
-import { Redirect } from 'react-router';
+import Cookies from 'js-cookie'
 
 
 export default function Login() {
 
     const [isLogged, setIsLogged] = useState(false);
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState();
+    const [token, setToken] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const user = {
-            username: username,
-            password: password
-        };
 
         axios.post(`http://localhost:3000/api/v1/login`, {
             username: username,
             password: password
         })
             .then(res => {
-                console.log(res);
-                res.status === 200 && setIsLogged(true)
-                setUser(res.data)
-                
+                if (res.status === 200) {
+                    setToken(res.data.token)
+                    Cookies.set('token', res.data.token, { expires: 1 });
+                    setIsLogged(true)
+                }
             })
             .catch(err => {
                 console.log("Failed sorry: try again" + err);
@@ -38,7 +32,7 @@ export default function Login() {
 
 
     if (isLogged) {
-        return <Redirect to={{ pathname: "/home", state: { user: user } }} />
+        return <div><h6>Logged: Token is {token}</h6></div>
     } else {
         return (
             <div>
@@ -79,13 +73,13 @@ export default function Login() {
 
                                 <h6 className="seperator"><span>or</span></h6>
 
-                                <a href="#" className="fb btn login-fields">
+                                <a href="/#" className="fb btn login-fields">
                                     <i className="fa fa-facebook fa-fw"></i> Login with Facebook </a
                                 ><br />
-                                <a href="#" className="twitter btn login-fields">
+                                <a href="/#" className="twitter btn login-fields">
                                     <i className="fa fa-twitter fa-fw"></i> Login with Twitter </a
                                 ><br />
-                                <a href="#" className="google btn login-fields">
+                                <a href="/#" className="google btn login-fields">
                                     <i className="fa fa-google fa-fw"></i> Login with Google+
         </a>
                             </div>

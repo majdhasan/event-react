@@ -2,25 +2,29 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import EventCard from '../AppComponents/EventCard'
 import EventCardMaterial from '../AppComponents/EventCardMaterial'
-
 import Footer from '../LandingPageSections/Footer'
 import NavCustomer from '../NavCustomer'
+import Cookies from 'js-cookie'
 
 export default function Home() {
 
+    const token = Cookies.get('token');
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
     const [user, setUser] = useState();
 
     useEffect(() => {
-
-        axios.get(`http://localhost:3000/api/v1/loggedUser`)
+        axios.get(`http://localhost:3000/api/v1/test`, config)
             .then(res => {
                 console.log(res);
-                res.status === 200 && setUser(res.data)
+                res.status === 200 && setUser(res.data.user)
             })
             .catch(err => {
                 console.log("Failed sorry: try again" + err);
             })
-    });
+    }, []);
+
     return (
         <div>
             <NavCustomer></NavCustomer>
@@ -39,7 +43,7 @@ export default function Home() {
                                 <h1>Hi {user && (user.firstname + " " + user.lastname)}</h1>
                             </div>
                             <div className="row">
-                                <p>You have <b>0</b> pending invites</p>
+                                <p>You have <b>{user && user.pendingInvites}</b> pending invites</p>
                             </div>
                         </div>
                         <div className="col col-lg-3 col-md-12 col-sm-12 col-sx-12 ml-auto">
@@ -66,20 +70,12 @@ export default function Home() {
 
                     <h4>Your upcoming Events</h4>
                     <div className="row">
-                        <EventCard></EventCard>
-                        <EventCard></EventCard>
-                        <EventCard></EventCard>
-                        <EventCard></EventCard>
-                        <EventCard></EventCard>
-                        <EventCard></EventCard>
-                        <EventCardMaterial></EventCardMaterial>
-                        <EventCardMaterial></EventCardMaterial>
-                        <EventCardMaterial></EventCardMaterial>
-                        <EventCardMaterial></EventCardMaterial>
-                        <EventCardMaterial></EventCardMaterial>
-
-                        <EventCardMaterial></EventCardMaterial>
-
+                   
+                        <EventCardMaterial />
+                        <EventCardMaterial />
+                        <EventCardMaterial />
+                        <EventCardMaterial />
+                        <EventCardMaterial />
                     </div>
                 </div>
             </section>

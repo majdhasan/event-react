@@ -83,7 +83,6 @@ export default function Event() {
                                 <Comment />
                                 <Comment />
                                 <Comment />
-                                
                             </div>
                         </div>
                     </section>
