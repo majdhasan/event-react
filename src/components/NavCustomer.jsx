@@ -24,9 +24,7 @@ export default function NavCustomer() {
 
         <div className='collapse navbar-collapse' id='navbarColor01'>
           <ul className='navbar-nav ml-auto'>
-            {/* <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/">Home</a>
-          </li> */}
+        
             <li className='nav-item'>
               <Link className='nav-link js-scroll-trigger' to={'/supplier'}>
                 I'm a Supplier
