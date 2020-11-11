@@ -9,7 +9,7 @@ import Home from './components/AppViews/Home';
 import Event from './components/AppViews/Event';
 import SearchResults from './components/AppViews/SearchResults';
 import NewEvent from './components/AppViews/NewEvent';
-
+import Chat from './components/AppViews/Chat'
 function App() {
   return (
     <Switch>
@@ -34,8 +34,11 @@ function App() {
       <Route exact path="/results">
         <SearchResults />
       </Route>
-      <Route exact path="/new-event/">
+      <Route exact path="/new-event">
         <NewEvent />
+      </Route>
+      <Route exact path="/chat">
+        <Chat />
       </Route>
     </Switch>
   );

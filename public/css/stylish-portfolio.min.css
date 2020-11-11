@@ -926,10 +926,7 @@ h4.new-comment {
   background: #ebebeb;
 }
 
-.incoming_msg_img {
-  display: inline-block;
-  width: 6%;
-}
+
 .received_msg {
   display: inline-block;
   vertical-align: top;
@@ -951,7 +948,9 @@ h4.new-comment {
   margin: 8px 0 0;
 }
 .received_withd_msg {
-  width: 57%;
+  text-align: left;
+  width: fit-content;
+  max-width: 80%
 }
 .mesgs {
   float: left;
@@ -974,7 +973,10 @@ h4.new-comment {
 }
 .sent_msg {
   float: right;
-  width: 46%;
+  width: fit-content;
+  text-align: right;
+  max-width: 80%;
+
 }
 .input_msg_write input {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -1019,7 +1021,7 @@ input.write_msg {
   outline-width: 0;
 }
 
-.recent_heading h4{
+.recent_heading h4 {
   text-align: left;
 }
 
@@ -1029,6 +1031,6 @@ i.fas.fa-plus-circle {
 /* Chat end */
 
 /* Comment */
-#comments{
-  padding: 0 35px
+#comments {
+  padding: 0 35px;
 }
