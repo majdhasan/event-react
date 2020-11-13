@@ -1,27 +1,33 @@
-import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
+import { loginUser } from '../http-common'
+import { Redirect } from "react-router-dom";
+
 
 
 export default function Login() {
 
-    const [isLogged, setIsLogged] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [token, setToken] = useState("");
 
+
+
+    useEffect(() => {
+        return (
+            setToken(Cookies.get('token'))
+        )
+    }, [])
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(`http://localhost:3000/api/v1/login`, {
-            username: username,
-            password: password
-        })
+        loginUser({ username: username, password: password })
             .then(res => {
                 if (res.status === 200) {
-                    setToken(res.data.token)
                     Cookies.set('token', res.data.token, { expires: 1 });
-                    setIsLogged(true)
+                    setToken(res.data.token)
                 }
             })
             .catch(err => {
@@ -31,8 +37,8 @@ export default function Login() {
 
 
 
-    if (isLogged) {
-        return <div><h6>Logged: Token is {token}</h6></div>
+    if (typeof token != 'undefined' && token !== "") {
+        return <Redirect to={'/home'} />
     } else {
         return (
             <div>

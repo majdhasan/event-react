@@ -724,6 +724,9 @@ input[type='submit']:hover {
   display: flex;
 }
 
+.homeSubheadline{
+  margin-bottom: 20px;
+}
 /* Event Box */
 .event {
   background: #fff;
@@ -945,7 +948,7 @@ h4.new-comment {
   color: #747474;
   display: block;
   font-size: 12px;
-  margin: 8px 0 0;
+  margin: 0 0 8px;
 }
 .received_withd_msg {
   text-align: left;
@@ -961,7 +964,6 @@ h4.new-comment {
 .sent_msg p {
   background: #1d809f none repeat scroll 0 0;
   border-radius: 3px;
-  font-size: 14px;
   margin: 0;
   color: #fff;
   padding: 5px 10px 5px 12px;
@@ -969,7 +971,6 @@ h4.new-comment {
 }
 .outgoing_msg {
   overflow: hidden;
-  margin: 26px 0 26px;
 }
 .sent_msg {
   float: right;
@@ -1011,6 +1012,10 @@ h4.new-comment {
 .msg_history {
   height: 516px;
   overflow-y: auto;
+}
+
+.greyBackground{
+  background-color: #05728f;
 }
 
 .search-bar {
