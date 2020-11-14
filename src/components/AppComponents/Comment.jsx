@@ -3,7 +3,7 @@ import React from 'react'
 export default function Comment() {
     return (
         <div className="media">
-            <a className="pull-left" href="#"
+            <a className="pull-left" href="/#"
             ><img
             className="img-responsive"
                     src="https://bootdey.com/img/Content/avatar/avatar1.png"

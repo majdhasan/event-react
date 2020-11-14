@@ -11,14 +11,10 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [token, setToken] = useState("");
 
-
-
     useEffect(() => {
-        return (
-            setToken(Cookies.get('token'))
-        )
+        setToken(Cookies.get('token'))
+        
     }, [])
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,14 +31,11 @@ export default function Login() {
             })
     }
 
-
-
     if (typeof token != 'undefined' && token !== "") {
         return <Redirect to={'/home'} />
     } else {
         return (
             <div>
-
                 <section className="content-section bg-light">
                     <div className="container text-center">
                         <div className="row">

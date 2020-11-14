@@ -1,40 +1,54 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef } from 'react';
 import EventCardMaterial from '../AppComponents/EventCardMaterial'
 import Footer from '../LandingPageSections/Footer'
 import NavCustomer from '../NavCustomer'
 import Cookies from 'js-cookie'
-import { getEvents, deleteEvent , getUser } from '../../http-common'
+import { getEvents, deleteEvent, getUser } from '../../http-common'
 import { Redirect } from "react-router-dom";
 
 
 import AlertDialogSlide from '../AppComponents/AlertDialogSlide'
+import LoadingCircle from '../AppComponents/LoadingCircle';
 
 
 export default function Home() {
 
-    const token = Cookies.get('token');
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    };
+
     const [user, setUser] = useState();
     const [loggedOut, setLoggedOut] = useState(false);
     const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const tokenRef = useRef("");
+    
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/v1/test`, config)
+        setLoading(true)
+        tokenRef.current = Cookies.get('token')
+        axios.get(`http://localhost:4000/api/v1/test`, {
+            headers: { Authorization: `Bearer ${tokenRef.current}` }
+        })
             .then(res => {
                 setUser(res.data.user)
+                axios.get(
+                    `http://localhost:4000/api/v1//event`,
+                    {
+                        headers: { Authorization: `Bearer ${tokenRef.current}` }
+                    }
+                ).then(response => {
+                    setEvents(response.data)
+                    setLoading(false)
+                })
             })
             .catch(err => {
                 console.log("Failed sorry: try again" + err);
             })
-        getEvents().then(res => {
-            setEvents(res)
-        })
+
     }, []);
 
     const handleLogout = () => {
+        setUser(null)
+        setEvents([])
         Cookies.remove('token')
         setLoggedOut(true);
     }
@@ -47,8 +61,10 @@ export default function Home() {
 
     if (loggedOut) {
         return <Redirect to={'/'} />
-    } else {
-
+    } else if (typeof Cookies.get('token') === 'undefined') {
+        return <Redirect to={'/login'} />
+    }
+    else {
         return (
             <div>
                 <NavCustomer></NavCustomer>
@@ -89,6 +105,7 @@ export default function Home() {
 
                         <h4 className={"homeSubheadline"} >Your upcoming Events</h4>
                         <div className="row">
+                            {loading && <LoadingCircle></LoadingCircle>}
                             {events && events.map((event, index) => {
                                 return (
                                     <EventCardMaterial handleDeleteEvent={handleDeleteEvent} key={index} event={event} />)

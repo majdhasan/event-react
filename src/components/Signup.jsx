@@ -16,11 +16,9 @@ export default function Signup() {
     const [redirect, setRedirect] = useState(false);
     const [loading, setLoading] = useState(false);
 
-
-
     const handleClick = () => {
         setLoading(true)
-        axios.post(`http://localhost:4000/api/v1/signup`, { fname: user.fname, lname: user.lname, username: user.username, password: user.password })
+        axios.post(`http://localhost:4000/api/v1/signup`, user)
             .then(res => {
                 setLoading(false)
                 setAccountCreated(true)
@@ -28,11 +26,8 @@ export default function Signup() {
                     setRedirect(true)
                 }, 5000);
             })
-            .catch(err => {
-                console.log("Failed sorry: try again" + err);
-            })
+            .catch(err => { throw err })
     }
-
 
     const onChange = (e) => {
         const { name, value } = e.target;

@@ -70,7 +70,6 @@ async function deleteEvent(eventId) {
   return response
 }
 
-
 export {
   config,
   axiosClient,
@@ -81,5 +80,6 @@ export {
   loginUser,
   getUser,
   getEvents,
-  deleteEvent
+  deleteEvent,
+  
 };
